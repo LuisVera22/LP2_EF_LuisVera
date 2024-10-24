@@ -35,12 +35,12 @@ public class UserController {
 		boolean usuarioValidado = userService.validateUser(userEntity);
 		if(usuarioValidado) {
 			session.setAttribute("user", userEntity.getEmail());
-			return "redirect:/menu";
+			return "redirect:/lista_productos";
 		}
 		
 		model.addAttribute("invalidLogin","No existe el usuario");
 		model.addAttribute("usuario", new UserEntity());
-		return "login";
+		return "redirect:/";
 	}
 	@GetMapping("/logout")
 	public String logout(HttpSession sesion) {
@@ -59,7 +59,7 @@ public class UserController {
             @RequestParam("photo") MultipartFile photo) {
         userService.userRegister(newUser, photo);
         model.addAttribute("successfullyRegistered","Usuario registrado exitosamente");
-        return "/user_register";
+        return "redirect:/user_register";
     }
     
 }
